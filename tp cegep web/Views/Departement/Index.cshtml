@@ -1,0 +1,32 @@
+﻿@using GestionCegepWeb.Models
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+    <br>
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+}
+else
+{
+    @*Affichage de la liste des Départements...*@
+    <br>
+    <h3>Liste des département(s) (@ViewBag.ListeDepartement.Length Département(s)) :</h3>
+    <br>
+    
+    <table>
+        <tbody><tr>
+            <th>No</th>
+            <th>Nom</th>
+            <th>Description</th>
+        </tr>
+        @foreach (DepartementDTO departement in ViewBag.ListeDepartement)
+        {
+            <tr>
+                <td>@departement.No</td>
+                <td>@departement.Nom</td>
+                <td>@departement.Description</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+}
