@@ -13,9 +13,12 @@ namespace tp_cegep_web.Controllers
         {
             try
             {
-                //nomCegep = "Cégep de Rivière-du-Loup";
-                nomCegep = "Cégep de la Pocatière";
+                if(nomCegep == null)
+                {
+                    nomCegep = CegepControleur.Instance.ObtenirListeCegep()[0].Nom;
+                }
                 //Préparation des données pour la vue...
+                ViewBag.ListeCegeps = CegepControleur.Instance.ObtenirListeCegep().ToArray();
                 ViewBag.ListeDepartement = CegepControleur.Instance.ObtenirListeDepartement(nomCegep).ToArray();
             }
             catch (Exception e)

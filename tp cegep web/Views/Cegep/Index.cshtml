@@ -1,5 +1,6 @@
-﻿@using GestionCegepWeb.Models
+﻿<!-- saved from url=(0090)https://rdl.moodle.decclic.qc.ca/pluginfile.php/109283/mod_resource/content/0/Index.cshtml -->
 @*Si erreur du côté serveur... affichage du message d'erreur...*@
+@using GestionCegepWeb.Models;
 @if (ViewBag.MessageErreur != null)
 {
     <br>
@@ -9,15 +10,31 @@ else
 {
     @*Affichage de la liste des cégeps...*@
     <br>
-    <h3>Sélectionner un Cégep :</h3>
+    <h3>Liste des cégep(s) (@ViewBag.ListeCegeps.Length Cégep(s)) :</h3>
     <br>
-    
-    <select id="departement" name="departementListe">
 
+    <table>
+        <tbody><tr>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Ville</th>
+            <th>Province</th>
+            <th>Code Postal</th>
+            <th>Téléphone</th>
+            <th>Courriel</th>
+        </tr>
         @foreach (CegepDTO cegep in ViewBag.ListeCegeps)
         {
-            <option value="nomCegep">@cegep.Nom</option>
+            <tr>
+                <td>@cegep.Nom</td>
+                <td>@cegep.Adresse</td>
+                <td>@cegep.Ville</td>
+                <td>@cegep.Province</td>
+                <td>@cegep.CodePostal</td>
+                <td>@cegep.Telephone</td>
+                <td>@cegep.Courriel</td>
+            </tr>
         }
-    </select>
-
+        </tbody>
+    </table>
 }

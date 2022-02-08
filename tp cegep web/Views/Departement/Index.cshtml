@@ -7,6 +7,21 @@
 }
 else
 {
+    <form method="get" asp-controller="Departement" asp-action="Index">
+    @*Affichage de la liste des cégeps...*@
+        <br>
+            <h3>Sélectionner un Cégep :</h3>
+        <br>
+
+        <select id="departement" onchange="submit();" name="nomCegep">
+            <option>Sélectionner un Cegep</option>
+
+            @foreach (CegepDTO cegep in ViewBag.ListeCegeps)
+            {
+                <option value="@cegep.Nom">@cegep.Nom</option>
+            }
+        </select>
+    </form>
     @*Affichage de la liste des Départements...*@
     <br>
     <h3>Liste des département(s) (@ViewBag.ListeDepartement.Length Département(s)) :</h3>
