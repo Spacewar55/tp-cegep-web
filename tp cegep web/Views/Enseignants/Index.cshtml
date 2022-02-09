@@ -1,0 +1,90 @@
+﻿@using GestionCegepWeb.Models
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+    <br>
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+}
+else
+{
+    <form method="get" asp-controller="Enseignant" asp-action="Index">
+    @*Affichage de la liste des cegeps...*@
+        <br>
+            <h3>Sélectionner un Cégep :</h3>
+        <br>
+
+        <select id="cegep" onchange="submit();" name="nomCegep">
+
+            @foreach (CegepDTO cegep in ViewBag.ListeCegeps)
+            {
+                if(cegep.Nom.Equals(@ViewBag.nomCegep))
+                {
+                    <option value="@cegep.Nom" selected>@cegep.Nom</option>
+                }
+                else
+                {
+                    <option value="@cegep.Nom">@cegep.Nom</option>
+                    
+                }
+            }
+        </select>
+
+        <br>
+            <h3>Sélectionner un Département :</h3>
+        <br>
+
+        <select id="departement" onchange="submit();" name="nomDepartement">
+
+            @foreach (DepartementDTO departement in ViewBag.ListeDepartements)
+            {
+                if(departement.Nom.Equals(@ViewBag.nomDepartement))
+                {
+                    <option value="@departement.Nom" selected>@departement.Nom</option>
+                }
+                else
+                {
+                    <option value="@departement.Nom">@departement.Nom</option>
+                    
+                }
+            }
+        </select>
+    </form>
+    @*Affichage de la liste des Enseignants...*@
+    <br>
+    <h3>Liste des enseignant(s) (@ViewBag.ListeEnseignants.Length Enseignant(s)) :</h3>
+    <br>
+    
+    <table>
+        <tbody><tr>
+            <th>Numéro Employé</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Adresse</th>
+            <th>Ville</th>
+            <th>Province</th>
+            <th>Code Postal</th>
+            <th>Telephone</th>
+            <th>Courriel</th>
+            <th>Date d'embauche</th>
+            <th>Date d'arret</th>
+        </tr>
+        @foreach (EnseignantDTO enseignant in ViewBag.ListeEnseignants)
+        {
+            <tr>
+                <td>@enseignant.NoEmploye</td>
+                <td>@enseignant.Nom</td>
+                <td>@enseignant.Prenom</td>
+                <td>@enseignant.Adresse</td>
+                <td>@enseignant.Ville</td>
+                <td>@enseignant.Province</td>
+                <td>@enseignant.CodePostal</td>
+                <td>@enseignant.Telephone</td>
+                <td>@enseignant.Courriel</td>
+                <td>@enseignant.DateEmbauche</td>
+                <td>@enseignant.DateArret</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+}

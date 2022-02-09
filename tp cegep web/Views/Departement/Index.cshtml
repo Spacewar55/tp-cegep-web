@@ -13,12 +13,19 @@ else
             <h3>Sélectionner un Cégep :</h3>
         <br>
 
-        <select id="departement" onchange="submit();" name="nomCegep">
-            <option>Sélectionner un Cegep</option>
+        <select id="cegep" onchange="submit();" name="nomCegep">
 
             @foreach (CegepDTO cegep in ViewBag.ListeCegeps)
             {
-                <option value="@cegep.Nom">@cegep.Nom</option>
+                if(cegep.Nom.Equals(@ViewBag.nomCegep))
+                {
+                    <option value="@cegep.Nom" selected>@cegep.Nom</option>
+                }
+                else
+                {
+                    <option value="@cegep.Nom">@cegep.Nom</option>
+                    
+                }
             }
         </select>
     </form>
