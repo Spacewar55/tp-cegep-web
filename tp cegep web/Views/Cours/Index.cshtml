@@ -7,7 +7,7 @@
 }
 else
 {
-    <form method="get" asp-controller="Enseignant" asp-action="Index">
+    <form method="get" asp-controller="Cours" asp-action="Index">
     @*Affichage de la liste des cegeps...*@
         <br>
             <h3>Sélectionner un Cégep :</h3>
@@ -43,44 +43,28 @@ else
                 }
                 else
                 {
-                    <option value="@departement.Nom">@departement.Nom</option> 
+                    <option value="@departement.Nom">@departement.Nom</option>
                 }
             }
         </select>
     </form>
-    @*Affichage de la liste des Enseignants...*@
+    @*Affichage de la liste des Cours...*@
     <br>
-    <h3>Liste des enseignant(s) (@ViewBag.ListeEnseignants.Length Enseignant(s)) :</h3>
+    <h3>Liste des cour(s) (@ViewBag.ListeCours.Length Cours(s)) :</h3>
     <br>
     
     <table>
         <tbody><tr>
-            <th>Numéro Employé</th>
+            <th>Numéro</th>
             <th>Nom</th>
-            <th>Prénom</th>
-            <th>Adresse</th>
-            <th>Ville</th>
-            <th>Province</th>
-            <th>Code Postal</th>
-            <th>Telephone</th>
-            <th>Courriel</th>
-            <th>Date d'embauche</th>
-            <th>Date d'arret</th>
+            <th>Description</th>
         </tr>
-        @foreach (EnseignantDTO enseignant in ViewBag.ListeEnseignants)
+        @foreach (CoursDTO cours in ViewBag.ListeCours)
         {
             <tr>
-                <td>@enseignant.NoEmploye</td>
-                <td>@enseignant.Nom</td>
-                <td>@enseignant.Prenom</td>
-                <td>@enseignant.Adresse</td>
-                <td>@enseignant.Ville</td>
-                <td>@enseignant.Province</td>
-                <td>@enseignant.CodePostal</td>
-                <td>@enseignant.Telephone</td>
-                <td>@enseignant.Courriel</td>
-                <td>@enseignant.DateEmbauche</td>
-                <td>@enseignant.DateArret</td>
+                <td>@cours.No</td>
+                <td>@cours.Nom</td>
+                <td>@cours.Description</td>
             </tr>
         }
         </tbody>
