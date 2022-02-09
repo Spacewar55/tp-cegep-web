@@ -39,7 +39,21 @@ namespace tp_cegep_web.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.MessageErreur = e.Message;
+                if (e.Message == "Erreur lors de l'obtention d'un département par son nom et son cégep...")
+                {
+                    nomDepartement = CegepControleur.Instance.ObtenirListeDepartement(nomCegep)[0].Nom;
+
+                    ViewBag.nomCegep = nomCegep;
+                    ViewBag.nomDepartement = nomDepartement;
+
+                    ViewBag.ListeCegeps = CegepControleur.Instance.ObtenirListeCegep().ToArray();
+                    ViewBag.ListeDepartements = CegepControleur.Instance.ObtenirListeDepartement(nomCegep).ToArray();
+                    ViewBag.ListeCours = CegepControleur.Instance.ObtenirListeCours(nomCegep, nomDepartement).ToArray();
+                }
+                else
+                {
+                    ViewBag.MessageErreur = e.Message;
+                }
             }
             //Retour de la vue...
             return View();
