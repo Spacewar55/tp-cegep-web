@@ -1,4 +1,7 @@
-﻿@using GestionCegepWeb.Models
+﻿<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></head>
+@using GestionCegepWeb.Models
+@model CoursDTO;
 @*Si erreur du côté serveur... affichage du message d'erreur...*@
 @if (ViewBag.MessageErreur != null)
 {
@@ -69,5 +72,50 @@ else
         }
         </tbody>
     </table>
+    <br>
+    <b>Ajouter un cours : </b>
+    <br>
+    <br>
 
+    <form asp-controller="Cours" asp-action="AjouterCours" method="post">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <input name="nomCegep" value="@ViewBag.nomCegep" hidden>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="nomDepartement" value="@ViewBag.nomDepartement" hidden>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="No"></label>
+                </td>
+                <td>
+                    <input asp-for="No">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Nom"></label>
+                </td>
+                <td>
+                    <input asp-for="Nom">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Description"></label>
+                </td>
+                <td>
+                    <input asp-for="Description">
+                </td>
+            </tr>
+        </tbody></table>
+        <input type="submit" value="Ajouter">
+    </form>
+    <br>
 }
