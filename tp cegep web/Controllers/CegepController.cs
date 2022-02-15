@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using GestionCegepWeb.Logics.Controleurs;
+using GestionCegepWeb.Models;
 
 /// <summary>
 /// Namespace pour les controleurs de vue.
@@ -33,9 +34,28 @@ namespace tp_cegep_web.Controllers
             {
                 ViewBag.MessageErreur = e.Message;
             }
-            
+
             //Retour de la vue...
             return View();
         }
+
+        [Route("/Cegep/AjouterCegep")]
+        [HttpPost]
+        public IActionResult AjouterCegep([FromForm] CegepDTO cegepDTO)
+        {
+            try
+            {
+                CegepControleur.Instance.AjouterCegep(cegepDTO);
+            }
+            catch (Exception e)
+            {
+                //Mettre cette ligne en commentaire avant de lancer les tests fonctionnels
+                TempData["MessageErreur"] = e.Message;
+            }
+
+            //Lancement de l'action Index...
+            return RedirectToAction("Index", "Cegep", cegepDTO);
+        }
+
     }
 }

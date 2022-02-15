@@ -15,31 +15,31 @@ namespace GestionCegepWeb.Models
         /// <summary>
         /// Propriété représentant le nom du Cégep.
         /// </summary>
-        public string Nom { get; private set; }
+        public string Nom { get;  set; }
         /// <summary>
         /// Propriété représentant l'adresse du Cégep.
         /// </summary>
-        public string Adresse { get; private set; }
+        public string Adresse { get;  set; }
         /// <summary>
         /// Propriété représentant la ville du Cégep.
         /// </summary>
-        public string Ville { get; private set; }
+        public string Ville { get;  set; }
         /// <summary>
         /// Propriété représentant la province du Cégep.
         /// </summary>
-        public string Province { get; private set; }
+        public string Province { get;  set; }
         /// <summary>
         /// Propriété représentant le code postal du Cégep.
         /// </summary>
-        public string CodePostal { get; private set; }
+        public string CodePostal { get;  set; }
         /// <summary>
         /// Propriété représenant le téléphone du Cégep.
         /// </summary>
-        public string Telephone { get; private set; }
+        public string Telephone { get;  set; }
         /// <summary>
         /// Propriété représentant le courriel du Cégep.
         /// </summary>
-        public string Courriel { get; private set; }
+        public string Courriel { get;  set; }
 
         #endregion Proprietes
 
@@ -55,6 +55,8 @@ namespace GestionCegepWeb.Models
         /// <param name="codePostal">Code postal du Cégep.</param>
         /// <param name="telephone">Téléphone du Cégep.</param>
         /// <param name="courriel">Courriel du Cégep.</param>
+        /// 
+
         public CegepDTO(string nom="", string adresse="", string ville="", string province="", string codePostal="", string telephone="", string courriel="")
         {
             Nom = nom;

@@ -25,7 +25,10 @@ namespace GestionCegepWeb.Logics.DAOs
         /// </summary>
         protected Repository()
         {
-            connexion = new SqlConnection("Server = 192.168.102.100; Database = Cegep2; User Id=Alex;Password=microsoftAlex;");
+            //Adresse Cegep
+            connexion = new SqlConnection("Server = 10.172.80.43; Database = Cegep2; User Id=Alex;Password=microsoftAlex;");
+            //Adresse Res
+            //connexion = new SqlConnection("Server = 192.168.102.100; Database = Cegep2; User Id=Alex;Password=microsoftAlex;");
         }
 
         #endregion Constructeurs
