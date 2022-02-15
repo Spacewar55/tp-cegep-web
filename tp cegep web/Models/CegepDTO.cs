@@ -45,6 +45,9 @@ namespace GestionCegepWeb.Models
 
         #region Constructeurs
 
+        public CegepDTO()
+        { }
+
         /// <summary>
         /// Constructeur avec paramètres.
         /// </summary>
@@ -56,7 +59,6 @@ namespace GestionCegepWeb.Models
         /// <param name="telephone">Téléphone du Cégep.</param>
         /// <param name="courriel">Courriel du Cégep.</param>
         /// 
-
         public CegepDTO(string nom="", string adresse="", string ville="", string province="", string codePostal="", string telephone="", string courriel="")
         {
             Nom = nom;
