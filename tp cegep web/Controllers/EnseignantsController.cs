@@ -1,4 +1,5 @@
 ﻿using GestionCegepWeb.Logics.Controleurs;
+using GestionCegepWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -58,6 +59,24 @@ namespace tp_cegep_web.Controllers
             }
             //Retour de la vue...
             return View();
+        }
+
+        [Route("/Enseignant/AjouterEnseignant")]
+        [HttpPost]
+        public IActionResult AjouterEnseignant([FromForm] string nomCegep, [FromForm] string nomDepartement, [FromForm] EnseignantDTO enseignantDTO)
+        {
+            try
+            {
+                CegepControleur.Instance.AjouterEnseignant(nomCegep, nomDepartement, enseignantDTO);
+            }
+            catch (Exception e)
+            {
+                //Mettre cette ligne en commentaire avant de lancer les tests fonctionnels
+                TempData["MessageErreur"] = e.Message;
+            }
+
+            //Lancement de l'action Index...
+            return RedirectToAction("Index", "Enseignant", new {nomCegep = nomCegep, nomDepartement = nomDepartement});
         }
     }
 }

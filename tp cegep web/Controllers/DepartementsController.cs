@@ -58,7 +58,7 @@ namespace tp_cegep_web.Controllers
             }
 
             //Lancement de l'action Index...
-            return RedirectToAction("Index", "Departement");
+            return RedirectToAction("Index", "Departement", new { nomCegep = nomCegep });
         }
     }
 }
