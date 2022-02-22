@@ -1,7 +1,6 @@
 ﻿<html><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"></head>
-@using GestionCegepWeb.Models
-@model CegepDTO;
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></head><body>@using GestionCegepWeb.Models
+@model EnseignantDTO;
 @*Si erreur du côté serveur... affichage du message d'erreur...*@
 @if (ViewBag.MessageErreur != null)
 {
@@ -10,53 +9,44 @@
 }
 else
 {
-    @*Affichage de la liste des cégeps...*@
     <br>
-    <h3>Liste des cégep(s) (@ViewBag.ListeCegeps.Length Cégep(s)) :</h3>
+    <h3>Modifier un Enseignant : </h3>
     <br>
-    <form asp-controller="" asp-action="" method="post">
+    <form asp-controller="Enseignant" asp-action="ModifierEnseignant" method="post">
         <table>
             <tbody>
-                <tr>
-                    <th>Nom</th>
-                    <th>Adresse</th>
-                    <th>Ville</th>
-                    <th>Province</th>
-                    <th>Code Postal</th>
-                    <th>Téléphone</th>
-                    <th>Courriel</th>
-                </tr>
-            @foreach (CegepDTO cegep in ViewBag.ListeCegeps)
-            {
-                <tr>
-                    <td>@cegep.Nom</td>
-                    <td>@cegep.Adresse</td>
-                    <td>@cegep.Ville</td>
-                    <td>@cegep.Province</td>
-                    <td>@cegep.CodePostal</td>
-                    <td>@cegep.Telephone</td>
-                    <td>@cegep.Courriel</td>
-                    <td><input value="Modifier" onclick="document.getElementById('nomCegep').value ='@cegep.Nom'; this.form.action='/Cegep/FormulaireModifierCegep'; this.form.method='get'; submit();" type="button"></td>
-                </tr>
-            }
-            </tbody>
-        </table>
-    <input id="nomCegep" name="nomCegep" type="hidden">
-    </form>
-
-    <br>
-    <b>Ajouter un cégep : </b>
-    <br>
-    <br>
-
-    <form asp-controller="Cegep" asp-action="AjouterCegep" method="post">
-        <table>
-            <tbody><tr>
+            <tr>
+                <td>
+                    <input name="nomCegep" value="@ViewBag.nomCegep" hidden>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="nomDepartement" value="@ViewBag.nomDepartement" hidden>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="NoEmploye"></label>
+                </td>
+                <td>
+                    <input asp-for="NoEmploye" class="inputreadonly" readonly="readonly">
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <label asp-for="Nom"></label>
                 </td>
                 <td>
                     <input asp-for="Nom">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Prenom"></label>
+                </td>
+                <td>
+                    <input asp-for="Prenom">
                 </td>
             </tr>
             <tr>
@@ -107,9 +97,14 @@ else
                     <input asp-for="Courriel">
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Modifier">
+                </td>
+                <td>
+                    <input type="button" value="Annuler" onclick="history.back();">
+                </td>
+            </tr>
         </tbody></table>
-        <input type="submit" value="Ajouter">
     </form>
-    <br>
-}
-
+}</body></html>

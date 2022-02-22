@@ -55,7 +55,7 @@ else
     <br>
     <h3>Liste des cour(s) (@ViewBag.ListeCours.Length Cours(s)) :</h3>
     <br>
-    
+    <form asp-controller="" asp-action="" method="post">
     <table>
         <tbody><tr>
             <th>Numéro</th>
@@ -68,10 +68,15 @@ else
                 <td>@cours.No</td>
                 <td>@cours.Nom</td>
                 <td>@cours.Description</td>
+                <td><input value="Modifier" onclick="document.getElementById('nomCours').value ='@cours.Nom'; this.form.action='/Cours/FormulaireModifierCours'; this.form.method='get'; submit();" type="button"></td>
             </tr>
         }
         </tbody>
     </table>
+    <input id="nomCegep" name="nomCegep" type="hidden" value="@ViewBag.nomCegep">
+    <input id="nomDepartement" name="nomDepartement" type="hidden" value="@ViewBag.nomDepartement">
+    <input id="nomCours" name="nomCours" type="hidden">
+    </form>
     <br>
     <b>Ajouter un cours : </b>
     <br>

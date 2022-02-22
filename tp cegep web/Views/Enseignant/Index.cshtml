@@ -55,7 +55,7 @@ else
     <br>
     <h3>Liste des enseignant(s) (@ViewBag.ListeEnseignants.Length Enseignant(s)) :</h3>
     <br>
-    
+    <form asp-controller="" asp-action="" method="post">
     <table>
         <tbody><tr>
             <th>Numéro Employé</th>
@@ -67,8 +67,6 @@ else
             <th>Code Postal</th>
             <th>Telephone</th>
             <th>Courriel</th>
-            <th>Date d'embauche</th>
-            <th>Date d'arret</th>
         </tr>
         @foreach (EnseignantDTO enseignant in ViewBag.ListeEnseignants)
         {
@@ -82,12 +80,15 @@ else
                 <td>@enseignant.CodePostal</td>
                 <td>@enseignant.Telephone</td>
                 <td>@enseignant.Courriel</td>
-                <td>@enseignant.DateEmbauche</td>
-                <td>@enseignant.DateArret</td>
+                <td><input value="Modifier" onclick="document.getElementById('noEnseignant').value ='@enseignant.NoEmploye'; this.form.action='/Enseignant/FormulaireModifierEnseignant'; this.form.method='get'; submit();" type="button"></td>
             </tr>
         }
         </tbody>
     </table>
+    <input id="nomCegep" name="nomCegep" type="hidden" value="@ViewBag.nomCegep">
+    <input id="nomDepartement" name="nomDepartement" type="hidden" value="@ViewBag.nomDepartement">
+    <input id="noEnseignant" name="noEnseignant" type="hidden">
+    </form>
 
     <br>
     <b>Ajouter un département : </b>
@@ -183,5 +184,4 @@ else
         <input type="submit" value="Ajouter">
     </form>
     <br>
-
 }

@@ -11,7 +11,7 @@ namespace tp_cegep_web.Controllers
     /// <summary>
     /// Classe représentant le controleur de vue des Enseignants.
     /// </summary>
-    public class EnseignantsController : Controller
+    public class EnseignantController : Controller
     {
         /// <summary>
         /// Méthode de service appelé lors de l'action Index.
@@ -77,6 +77,54 @@ namespace tp_cegep_web.Controllers
 
             //Lancement de l'action Index...
             return RedirectToAction("Index", "Enseignant", new {nomCegep = nomCegep, nomDepartement = nomDepartement});
+        }
+
+        /// <summary>
+        /// Action FormulaireModifierDepartement.
+        /// Permet d'afficher le formulaire pour la modification d'un Département.
+        /// </summary>
+        /// <param name="nomCegep">Nom du Cégep.</param>
+        /// <param name="nomDepartement">Nom du Département.</param>
+        /// <param name="noEnseignant">No de l'Enseignant.</param>
+        /// <returns>IActionResult</returns>
+        [Route("/Enseignant/FormulaireModifierEnseignant")]
+        [HttpGet]
+        public IActionResult FormulaireModifierEnseignant([FromQuery] string nomCegep, [FromQuery] string nomDepartement, [FromQuery] int noEnseignant)
+        {
+            try
+            {
+                EnseignantDTO enseignant = CegepControleur.Instance.ObtenirEnseignant(nomCegep, nomDepartement, noEnseignant);
+                ViewBag.nomCegep = nomCegep;
+                ViewBag.nomDepartement = nomDepartement;
+                return View(enseignant);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
+
+        /// <summary>
+        /// Action ModifierEnseignant.
+        /// Permet de modifier un Enseignant.
+        /// </summary>
+        /// <param name="enseignantDTO">L'Enseignant a modifier.</param>
+        /// <returns>ActionResult</returns>
+        [Route("/Enseignant/ModifierEnseignant")]
+        [HttpPost]
+        public IActionResult ModifierEnseignant([FromForm] string nomCegep, [FromForm] string nomDepartement, [FromForm] EnseignantDTO enseignantDTO)
+        {
+            try
+            {
+                CegepControleur.Instance.ModifierEnseignant(nomCegep, nomDepartement, enseignantDTO);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("FormulaireModifierEnseignant", "Enseignant", new { nomCegep = nomCegep, nomDepartement = nomDepartement, noEnseignant = enseignantDTO.NoEmploye });
+            }
+            //Lancement de l'action Index...
+            return RedirectToAction("Index", new { nomCegep = nomCegep, nomDepartement = nomDepartement });
         }
     }
 }

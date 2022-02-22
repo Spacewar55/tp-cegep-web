@@ -1,0 +1,62 @@
+﻿<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></head><body>@using GestionCegepWeb.Models
+@model CoursDTO;
+@*Si erreur du côté serveur... affichage du message d'erreur...*@
+@if (ViewBag.MessageErreur != null)
+{
+    <br>
+    <h2 class="alert-danger">@ViewBag.MessageErreur</h2>
+}
+else
+{
+    <br>
+    <h3>Modifier un Cours : </h3>
+    <br>
+    <form asp-controller="Cours" asp-action="ModifierCours" method="post">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <input name="nomCegep" value="@ViewBag.nomCegep" hidden>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="nomDepartement" value="@ViewBag.nomDepartement" hidden>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="No"></label>
+                </td>
+                <td>
+                    <input asp-for="No">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Nom"></label>
+                </td>
+                <td>
+                    <input asp-for="Nom" class="inputreadonly" readonly="readonly">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Description"></label>
+                </td>
+                <td>
+                    <input asp-for="Description">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Modifier">
+                </td>
+                <td>
+                    <input type="button" value="Annuler" onclick="history.back();">
+                </td>
+            </tr>
+        </tbody></table>
+    </form>
+}</body></html>

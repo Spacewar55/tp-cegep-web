@@ -60,6 +60,52 @@ namespace tp_cegep_web.Controllers
             //Lancement de l'action Index...
             return RedirectToAction("Index", "Departement", new { nomCegep = nomCegep });
         }
+
+        /// <summary>
+        /// Action FormulaireModifierDepartement.
+        /// Permet d'afficher le formulaire pour la modification d'un Département.
+        /// </summary>
+        /// <param name="nomCegep">Nom du Cégep.</param>
+        /// <param name="nomDepartement">Nom du Département.</param>
+        /// <returns>IActionResult</returns>
+        [Route("/Departement/FormulaireModifierDepartement")]
+        [HttpGet]
+        public IActionResult FormulaireModifierDepartement([FromQuery] string nomCegep, [FromQuery] string nomDepartement)
+        {
+            try
+            {
+                DepartementDTO departement = CegepControleur.Instance.ObtenirDepartement(nomCegep, nomDepartement);
+                ViewBag.nomCegep = nomCegep;
+                return View(departement);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
+
+        /// <summary>
+        /// Action ModifierDepartement.
+        /// Permet de modifier un Département.
+        /// </summary>
+        /// <param name="departementDTO">Le Département a modifier.</param>
+        /// <returns>ActionResult</returns>
+        [Route("/Departement/ModifierDepartement")]
+        [HttpPost]
+        public IActionResult ModifierCegep([FromForm] string nomCegep, [FromForm] DepartementDTO departementDTO)
+        {
+            try
+            {
+                CegepControleur.Instance.ModifierDepartement(nomCegep, departementDTO);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("FormulaireModifierDepartement", "Departement", new { nomCegep = nomCegep, nomDepartement = departementDTO.Nom });
+            }
+            //Lancement de l'action Index...
+            return RedirectToAction("Index");
+        }
     }
 }
 

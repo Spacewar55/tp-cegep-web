@@ -77,5 +77,53 @@ namespace tp_cegep_web.Controllers
             //Lancement de l'action Index...
             return RedirectToAction("Index", "Cours", new { nomCegep = nomCegep, nomDepartement = nomDepartement });
         }
+
+        /// <summary>
+        /// Action FormulaireModifierDepartement.
+        /// Permet d'afficher le formulaire pour la modification d'un Département.
+        /// </summary>
+        /// <param name="nomCegep">Nom du Cégep.</param>
+        /// <param name="nomDepartement">Nom du Département.</param>
+        /// <param name="noEnseignant">No de l'Enseignant.</param>
+        /// <returns>IActionResult</returns>
+        [Route("/Cours/FormulaireModifierCours")]
+        [HttpGet]
+        public IActionResult FormulaireModifierCours([FromQuery] string nomCegep, [FromQuery] string nomDepartement, [FromQuery] string nomCours)
+        {
+            try
+            {
+                CoursDTO cours = CegepControleur.Instance.ObtenirCours(nomCegep, nomDepartement, nomCours);
+                ViewBag.nomCegep = nomCegep;
+                ViewBag.nomDepartement = nomDepartement;
+                return View(cours);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+
+        }
+
+        /// <summary>
+        /// Action ModifierEnseignant.
+        /// Permet de modifier un Enseignant.
+        /// </summary>
+        /// <param name="coursDTO">L'Enseignant a modifier.</param>
+        /// <returns>ActionResult</returns>
+        [Route("/Cours/ModifierCours")]
+        [HttpPost]
+        public IActionResult ModifierCours([FromForm] string nomCegep, [FromForm] string nomDepartement, [FromForm] CoursDTO coursDTO)
+        {
+            try
+            {
+                CegepControleur.Instance.ModifierCours(nomCegep, nomDepartement, coursDTO);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("FormulaireModifierCours", "Cours", new { nomCegep = nomCegep, nomDepartement = nomDepartement, nomCours = coursDTO.Nom });
+            }
+            //Lancement de l'action Index...
+            return RedirectToAction("Index", new { nomCegep = nomCegep, nomDepartement = nomDepartement });
+        }
     }
 }
