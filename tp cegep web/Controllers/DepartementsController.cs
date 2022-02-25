@@ -104,7 +104,7 @@ namespace tp_cegep_web.Controllers
                 return RedirectToAction("FormulaireModifierDepartement", "Departement", new { nomCegep = nomCegep, nomDepartement = departementDTO.Nom });
             }
             //Lancement de l'action Index...
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { nomCegep = nomCegep });
         }
     }
 }
